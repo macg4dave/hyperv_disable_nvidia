@@ -55,3 +55,11 @@ if [[ "$SRC_CHECKSUM" != "$DST_CHECKSUM" ]]; then
 else
     echo "$(date): No changes in $SRC_CONF; $DST_CONF is up-to-date" >> $LOG_FILE
 fi
+
+if [[ "$(systemd-detect-virt)" == "none" ]]; then
+    # Restart Plymouth on bare metal to avoid hanging issues
+    systemctl restart plymouth-quit.service
+    if [[ $? -ne 0 ]]; then
+        log_error "Failed to restart plymouth-quit.service"
+    fi
+fi
