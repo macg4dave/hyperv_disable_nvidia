@@ -1,0 +1,12 @@
+[Unit]
+Description=Check and Backup Xorg Config at Shutdown
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/check-xorg-changes.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=shutdown.target reboot.target halt.target

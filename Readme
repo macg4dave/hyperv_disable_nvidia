@@ -3,3 +3,11 @@ sudo systemctl enable hyperv-xorg-setup.service
 sudo systemctl start hyperv-xorg-setup.service
 
 sudo systemctl status hyperv-xorg-setup.service
+
+
+
+/etc/systemd/system/hyperv-xorg-changes.service
+
+sudo systemctl enable hyperv-xorg-changes.service
+
+sudo systemctl status hyperv-xorg-changes.service
