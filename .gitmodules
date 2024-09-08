@@ -1,3 +1,6 @@
 [submodule "modlistfiles/bin/error-logging.sh"]
 	path = modlistfiles/bin/error-logging.sh
 	url = https://github.com/macg4dave/error-logging.git
+[submodule "modlistfiles/bin/error-logging"]
+	path = modlistfiles/bin/error-logging
+	url = https://github.com/macg4dave/error-logging.git
