@@ -6,7 +6,7 @@ Before=display-manager.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/share/modlistfiles/hyperv-detect-runner.sh
+ExecStart=/usr/local/share/modlistfiles/bin/hyperv-detect-runner.sh
 RemainAfterExit=yes
 
 [Install]
