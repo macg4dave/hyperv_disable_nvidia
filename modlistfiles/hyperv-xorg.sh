@@ -16,33 +16,29 @@ log_error() {
 # Function to calculate checksum of a file
 get_checksum() {
     if [[ -f "$1" ]]; then
-        md5sum "$1" | awk '{ print $1 }'
+        /usr/bin/md5sum "$1" | awk '{ print $1 }'
     else
         echo "0"
     fi
 }
 
-# Function to detect NVIDIA or Hyper-V
-detect_nvidia() {
-    if lspci | grep -i "NVIDIA" > /dev/null; then
-        echo "nvidia"
-    else
-        echo "hyperv"
-    fi
+# Function to detect virtualization type
+detect_virtualization() {
+    local VIRT_ENV=$(systemd-detect-virt)
+    echo "$VIRT_ENV"
 }
 
 # Get current Xorg configuration checksum
 DST_CHECKSUM=$(get_checksum "$DST_CONF")
 
 # Detect environment: NVIDIA or Hyper-V
-VIRT_ENV=$(detect_nvidia)
+VIRT_ENV=$(detect_virtualization)
 
-if [[ "$VIRT_ENV" == "nvidia" ]]; then
-    # Running on native system with Nvidia
-    SRC_CONF="$NVIDIA_CONF"
-else
+if [[ "$VIRT_ENV" == "microsoft" ]]; then
     # Running inside Hyper-V
     SRC_CONF="$HYPERV_CONF"
+else
+    SRC_CONF="$NVIDIA_CONF"
 fi
 
 # Get the source Xorg configuration checksum
