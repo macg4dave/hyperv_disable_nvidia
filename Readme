@@ -1,0 +1,2 @@
+Add the following to /etc/rc.local before exit 0 to ensure the script runs at boot:
+/usr/local/share/modlistfiles/hyperv-detect-runner.sh
