@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#hyperv-xorg-changes.sh
 # Define paths
 CURRENT_XORG="/etc/X11/xorg.conf"
 BACKUP_XORG="/usr/local/share/hyperv-disable-nvidia/nvidia/xorg.conf"

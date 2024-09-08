@@ -5,7 +5,7 @@ Before=shutdown.target reboot.target halt.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/check-xorg-changes.sh
+ExecStart=/usr/local/share/modlistfiles/bin/hyperv-xorg-changes.sh
 RemainAfterExit=true
 
 [Install]
