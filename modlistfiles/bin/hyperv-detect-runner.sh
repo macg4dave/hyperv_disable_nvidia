@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#hyperv-detect-runner.sh
 # Paths to the scripts
 MODBLOCK_SCRIPT="/usr/local/share/modlistfiles/hyperv-modblock.sh"
 XORG_SCRIPT="/usr/local/share/modlistfiles/hyperv-xorg.sh"

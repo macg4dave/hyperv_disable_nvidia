@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#hyperv-modblock.sh
 # Log file for error messages
 LOG_FILE="/var/log/hyperv-modblock.log"
 

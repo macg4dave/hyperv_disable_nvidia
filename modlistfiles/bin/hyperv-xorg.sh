@@ -1,15 +1,24 @@
 #!/bin/bash
+# hyperv-xorg.sh
+# Source error logging script
+source /usr/local/share/modlistfiles/bin/error-logger/error-logger.sh
 
-# Log file for error messages
-source /usr/local/share/modlistfiles/bin/error_logger.sh
-LOG_FILE="/var/log/hyperv_disable_nvidia/hyperv-xorg.log"
-LOG_LEVEL=2  # ERROR level logging
+# Set log file and log level for the script
+log_file="/var/log/hyperv_disable_nvidia/hyperv-xorg.log"
+log_verbose=1  # ERROR level logging
+
+# Ensure log file directory exists
+mkdir -p "$(dirname "$log_file")"
+touch "$log_file"
 
 # Paths to Xorg configuration files
 HYPERV_CONF="/usr/local/share/modlistfiles/hyperv/xorg.conf"
 NVIDIA_CONF="/usr/local/share/modlistfiles/nvidia/xorg.conf"
 DST_CONF="/etc/X11/xorg.conf"
 
+# Verify configuration files exist
+[ -f "$HYPERV_CONF" ] || log_write 1 "Hyper-V configuration file missing: $HYPERV_CONF"
+[ -f "$NVIDIA_CONF" ] || log_write 1 "NVIDIA configuration file missing: $NVIDIA_CONF"
 
 # Function to calculate checksum of a file
 get_checksum() {
@@ -46,18 +55,18 @@ SRC_CHECKSUM=$(get_checksum "$SRC_CONF")
 if [[ "$SRC_CHECKSUM" != "$DST_CHECKSUM" ]]; then
     cp "$SRC_CONF" "$DST_CONF"
     if [[ $? -ne 0 ]]; then
-        log_error "Failed to copy $SRC_CONF to $DST_CONF"
+        log_write 1 "Failed to copy $SRC_CONF to $DST_CONF"
     else
-        echo "$(date): Successfully copied $SRC_CONF to $DST_CONF" >> $LOG_FILE
+        log_write 2 "Successfully copied $SRC_CONF to $DST_CONF"
     fi
 else
-    echo "$(date): No changes in $SRC_CONF; $DST_CONF is up-to-date" >> $LOG_FILE
+    log_write 2 "No changes in $SRC_CONF; $DST_CONF is up-to-date"
 fi
 
 if [[ "$(systemd-detect-virt)" == "none" ]]; then
     # Restart Plymouth on bare metal to avoid hanging issues
     systemctl restart plymouth-quit.service
     if [[ $? -ne 0 ]]; then
-        log_error "Failed to restart plymouth-quit.service"
+        log_write 1 "Failed to restart plymouth-quit.service"
     fi
 fi
