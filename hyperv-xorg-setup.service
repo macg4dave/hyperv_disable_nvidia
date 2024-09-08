@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Hyper-V/Nvidia Xorg Setup Scripts
+Before=display-manager.service    # Ensure this runs before the display manager
+Wants=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/share/modlistfiles/hyperv-detect-runner.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
