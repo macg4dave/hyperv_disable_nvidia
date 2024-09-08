@@ -5,7 +5,7 @@ CURRENT_XORG="/etc/X11/xorg.conf"
 BACKUP_XORG="/usr/local/share/modlistfiles/nvidia/xorg.conf"
 HYPERV_XORG="/usr/local/share/modlistfiles/hyperv/xorg.conf"
 
-source /usr/local/share/modlistfiles/bin/error-logger/error-logger.sh
+source /usr/local/share/modlistfiles/bin/error-logging/error-logging.sh
 
 # Set log file and log level for the script
 log_file="/var/log/hyperv_disable_nvidia/hyperv-xorg-changes.log"

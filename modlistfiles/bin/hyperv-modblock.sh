@@ -1,7 +1,7 @@
 #!/bin/bash
 # hyperv-modblock.sh
 # Source the error logging script
-source /usr/local/share/modlistfiles/bin/error-logger/error-logger.sh
+source /usr/local/share/modlistfiles/bin/error-logging/error-logging.sh
 
 # Set log file and log level for this script
 log_file="/var/log/hyperv-modblock.log"
