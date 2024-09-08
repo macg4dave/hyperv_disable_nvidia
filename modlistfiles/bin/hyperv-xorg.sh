@@ -1,17 +1,15 @@
 #!/bin/bash
 
 # Log file for error messages
-LOG_FILE="/var/log/hyperv-xorg.log"
+source /usr/local/share/modlistfiles/bin/error_logger.sh
+LOG_FILE="/var/log/hyperv_disable_nvidia/hyperv-xorg.log"
+LOG_LEVEL=2  # ERROR level logging
 
 # Paths to Xorg configuration files
 HYPERV_CONF="/usr/local/share/modlistfiles/hyperv/xorg.conf"
 NVIDIA_CONF="/usr/local/share/modlistfiles/nvidia/xorg.conf"
 DST_CONF="/etc/X11/xorg.conf"
 
-# Function to log errors
-log_error() {
-    echo "$(date): $1" >> $LOG_FILE
-}
 
 # Function to calculate checksum of a file
 get_checksum() {

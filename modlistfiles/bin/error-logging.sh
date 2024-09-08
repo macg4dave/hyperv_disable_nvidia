@@ -1,68 +1,41 @@
 #!/bin/bash
+# Usage on your script
+# source /path/to/error-logging.sh
 
-# Usage function to display commands
-usage() {
-    echo "Usage: $0 [-l <log level>] [-f <log file>] <log message>"
-    echo "Log levels: 1=NORMAL, 2=ERROR, 3=INFO, 4=DEBUG"
-    exit 1
+# log_file="/path/to/logfile.log"
+# log_verbose=2  # Set global verbose level
+
+# log_write 1 "This is an ERROR message"
+# log_write 2 "This is a NORMAL message"
+# log_write 3 "This is an INFO message"  # This won't be logged if verbose level is 2
+
+# Default settings
+log_verbose=1
+log_type=1
+log_file="./default.log"
+log_message="No message set for error-logging.sh"
+
+# Function to check and create log file path
+log_create_path() {
+    local log_file=$1
+    local dir=$(dirname "$log_file")
+    [[ ! -d "$dir" ]] && mkdir -p "$dir"
 }
 
-# Default log level and file
-LOG_LEVEL=1  # Default to NORMAL
-LOG_FILE=""
-
-# Parse options
-while getopts "l:f:h" opt; do
-    case $opt in
-        l) LOG_LEVEL=$OPTARG ;;
-        f) LOG_FILE=$OPTARG ;;
-        h) usage ;;
-        *) usage ;;
-    esac
-done
-shift $((OPTIND - 1))
-
-# Check if log message is provided
-log_message="$*"
-if [ -z "$log_message" ]; then
-    usage
-fi
-
-# Function to ensure log file path exists and write the log message
-write_log_file() {
-    local message=$1
-    local log_file=$2
-
-    if [ -n "$log_file" ]; then
-        local dir
-        dir=$(dirname "$log_file")
-
-        # Check if directory exists, create it if necessary
-        if [ ! -d "$dir" ]; then
-            mkdir -p "$dir"
-        fi
-
-        # Append log message to the file
-        echo "$message" >> "$log_file"
-    fi
-}
-
-# Function for logging
-log() {
+# Function to write log
+log_write() {
     local level=$1
     local message=$2
     local datetime=$(date +'%Y-%m-%d %H:%M:%S')
-    
-    # Map log level numbers to names
-    declare -A levels
-    levels=([1]="NORMAL" [2]="ERROR" [3]="INFO" [4]="DEBUG")
+    local formatted_message="$datetime - $message"
 
-    # Only log messages that match the current level or are more severe
-    if [ $level -le $LOG_LEVEL ]; then
-        echo "$datetime - ${levels[$level]}: $message"
-        write_log_file "$datetime - ${levels[$level]}: $message" "$LOG_FILE"
-    fi
+    [[ $level -le $log_verbose ]] && {
+        log_create_path "$log_file"
+        echo "$formatted_message" >> "$log_file"
+        return 0
+    }
+    return 1
 }
 
-# Log based on LOG_LEVEL
-log $LOG_LEVEL "$log_message"
+# Export log functions for sourcing
+export -f log_write log_create_path log_usage
