@@ -1,16 +1,15 @@
 #!/bin/bash
-#hyperv-modblock.sh
-# Log file for error messages
-LOG_FILE="/var/log/hyperv-modblock.log"
+# hyperv-modblock.sh
+# Source the error logging script
+source /usr/local/share/modlistfiles/bin/error-logger/error-logger.sh
+
+# Set log file and log level for this script
+log_file="/var/log/hyperv-modblock.log"
+log_verbose=1  # Set to log ERROR messages
 
 # Path to the configuration file
 SRC_CONF="/usr/local/share/modlistfiles/disable-nvidia-hyperv.conf"
 DST_CONF="/etc/modprobe.d/disable-nvidia-hyperv.conf"
-
-# Function to log errors
-log_error() {
-    echo "$(date): $1" >> $LOG_FILE
-}
 
 # Function to detect virtualization type
 detect_virtualization() {
@@ -26,9 +25,9 @@ if [[ "$VIRT_TYPE" == "microsoft" ]]; then
     if [[ ! -f "$DST_CONF" ]]; then
         cp "$SRC_CONF" "$DST_CONF"
         if [[ $? -ne 0 ]]; then
-            log_error "Failed to copy $SRC_CONF to $DST_CONF"
+            log_write 1 "Failed to copy $SRC_CONF to $DST_CONF"
         else
-            echo "$(date): Successfully copied $SRC_CONF to $DST_CONF" >> $LOG_FILE
+            log_write 2 "Successfully copied $SRC_CONF to $DST_CONF"
         fi
     fi
 else
@@ -36,11 +35,11 @@ else
     if [[ -f "$DST_CONF" ]]; then
         rm "$DST_CONF"
         if [[ $? -ne 0 ]]; then
-            log_error "Failed to remove $DST_CONF"
+            log_write 1 "Failed to remove $DST_CONF"
         else
-            echo "$(date): Successfully removed $DST_CONF" >> $LOG_FILE
+            log_write 2 "Successfully removed $DST_CONF"
         fi
     else
-        echo "$(date): $DST_CONF does not exist, no action needed" >> $LOG_FILE
+        log_write 2 "$DST_CONF does not exist, no action needed"
     fi
 fi
