@@ -27,7 +27,7 @@ VIRT_TYPE=$(detect_virtualization)
 
 if [[ "$VIRT_TYPE" == "microsoft" ]]; then
     # Operating within Hyper-V environment
-    log_write 2 "Operating within Hyper-V, no modifications to $DST_CONF necessary."
+    log_write 2 "Operating within Hyper-V, added $DST_CONF ."
 else
     # Operating on bare metal or virtualization type is none
     if [[ -f "$DST_CONF" ]]; then
