@@ -8,6 +8,7 @@
         body { font-family: Arial, sans-serif; line-height: 1.6; }
         h1, h2 { color: #333; }
         p, li { color: #555; }
+        pre { background-color: #f4f4f4; padding: 10px; }
     </style>
 </head>
 <body>
