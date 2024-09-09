@@ -1,6 +1,6 @@
 # HyperV Disable Nvidia
 
-HyperV Disable Nvidia manages Nvidia and Hyper-V configurations on Debian-based systems with Nvidia GPUs. It ensures the system uses the appropriate Xorg configuration depending on whether it is running on bare metal with Nvidia drivers or within a Microsoft Hyper-V environment.
+HyperV Disable Nvidia is a suite of scripts designed to manage Nvidia and Hyper-V configurations on Debian-based systems with Nvidia GPUs. It automatically adjusts the Xorg configuration and modprobe blacklists based on the operating environment—whether it's running on bare metal or within a Microsoft Hyper-V virtual environment.
 
 ## Overview
 
