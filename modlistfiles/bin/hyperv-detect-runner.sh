@@ -5,7 +5,7 @@ source /usr/local/share/modlistfiles/bin/error-logging/error-logging.sh
 
 # Set log file and log level for this script
 log_file="/var/log/hyperv-detect-runner.log"
-log_verbose=4  # Set to log ERROR messages
+log_verbose=1  # Set to log ERROR messages
 
 # Paths to the scripts
 MODBLOCK_SCRIPT="/usr/local/share/modlistfiles/bin/hyperv-modblock.sh"

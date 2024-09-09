@@ -9,7 +9,7 @@ source /usr/local/share/modlistfiles/bin/error-logging/error-logging.sh
 
 # Set log file and log level for the script
 log_file="/var/log/hyperv_disable_nvidia/hyperv-xorg-changes.log"
-log_verbose=4  # ERROR level logging
+log_verbose=1  # ERROR level logging
 
 # Detect running environment
 VIRT_TYPE=$(systemd-detect-virt)
