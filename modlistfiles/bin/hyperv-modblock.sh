@@ -5,7 +5,7 @@ source /usr/local/share/modlistfiles/bin/error-logging/error-logging.sh
 
 # Set log file and log level for this script
 log_file="/var/log/hyperv_disable_nvidia/hyperv-modblock.log"
-log_verbose=1  # Set to log ERROR messages
+log_verbose=4  # Set to log ERROR messages
 
 # Path to the configuration file
 SRC_CONF="/usr/local/share/modlistfiles/disable-nvidia-hyperv.conf"
