@@ -2,8 +2,8 @@
 #hyperv-xorg-changes.sh
 # Define paths
 CURRENT_XORG="/etc/X11/xorg.conf"
-BACKUP_XORG="/usr/local/share/hyperv-disable-nvidia/nvidia/xorg.conf"
-HYPERV_XORG="/usr/local/share/hyperv-disable-nvidia/hyperv/xorg.conf"
+BACKUP_XORG="/usr/local/share/modlistfiles/nvidia/xorg.conf"
+HYPERV_XORG="/usr/local/share/modlistfiles/hyperv/xorg.conf"
 
 source /usr/local/share/modlistfiles/bin/error-logger/error-logger.sh
 

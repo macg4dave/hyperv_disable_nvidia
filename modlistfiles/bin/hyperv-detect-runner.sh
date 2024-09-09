@@ -8,8 +8,8 @@ log_file="/var/log/hyperv-detect-runner.log"
 log_verbose=1  # Set to log ERROR messages
 
 # Paths to the scripts
-MODBLOCK_SCRIPT="/usr/local/share/modlistfiles/hyperv-modblock.sh"
-XORG_SCRIPT="/usr/local/share/modlistfiles/hyperv-xorg.sh"
+MODBLOCK_SCRIPT="/usr/local/share/modlistfiles/bin/hyperv-modblock.sh"
+XORG_SCRIPT="/usr/local/share/modlistfiles/bin/hyperv-xorg.sh"
 
 # Run the hyperv-modblock.sh script
 if [[ -f "$MODBLOCK_SCRIPT" ]]; then
